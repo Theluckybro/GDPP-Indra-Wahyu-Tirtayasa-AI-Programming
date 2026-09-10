@@ -6,6 +6,7 @@ using static GameInputAction;
 public class InputManager : MonoBehaviour, IPlayerActions
 {
     private GameInputAction _inputAction;
+    public UnityEvent<Vector2> OnMoveInput;
     private void Awake()
     {
         _inputAction = new GameInputAction();
@@ -22,6 +23,6 @@ public class InputManager : MonoBehaviour, IPlayerActions
     }
     public void OnMove(InputAction.CallbackContext context)
     {
-        Debug.Log(context.ReadValue<Vector2>());
+        OnMoveInput?.Invoke(context.ReadValue<Vector2>());
     }
 }
