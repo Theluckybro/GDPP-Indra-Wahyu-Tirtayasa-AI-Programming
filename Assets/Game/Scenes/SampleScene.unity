@@ -512,7 +512,7 @@ GameObject:
   - component: {fileID: 544174702}
   - component: {fileID: 544174701}
   - component: {fileID: 544174700}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -730,6 +730,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _characterController: {fileID: 1765228008}
+  _gravityScale: 1
 --- !u!1 &1974895235
 GameObject:
   m_ObjectHideFlags: 0
