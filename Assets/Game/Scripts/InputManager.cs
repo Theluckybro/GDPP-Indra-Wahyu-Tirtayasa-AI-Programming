@@ -7,6 +7,18 @@ public class InputManager : MonoBehaviour, IPlayerActions
 {
     private GameInputAction _inputAction;
     public UnityEvent<Vector2> OnMoveInput;
+    public UnityEvent<bool> OnSprintInput;
+    public void OnSprint(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            OnSprintInput?.Invoke(true);
+        }
+        else if (context.canceled)
+        {
+            OnSprintInput?.Invoke(false);
+        }
+    }
     private void Awake()
     {
         _inputAction = new GameInputAction();

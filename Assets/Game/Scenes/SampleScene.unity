@@ -194,6 +194,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  OnSprintInput:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1765228009}
+        m_TargetAssemblyTypeName: PlayerCharacterMovement, Assembly-CSharp
+        m_MethodName: SetSprint
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!4 &83636949
 Transform:
   m_ObjectHideFlags: 0
@@ -731,6 +746,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characterController: {fileID: 1765228008}
   _gravityScale: 1
+  _walkSpeed: 1
+  _sprintSpeed: 2
+  _acceleration: 0.5
 --- !u!1 &1974895235
 GameObject:
   m_ObjectHideFlags: 0

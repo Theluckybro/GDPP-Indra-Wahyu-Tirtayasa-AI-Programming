@@ -3,11 +3,15 @@ public class PlayerCharacterMovement : MonoBehaviour
 {
     [SerializeField] private CharacterController _characterController;
     [SerializeField] private float _gravityScale = 1;
+    [SerializeField] private float _walkSpeed = 1;
+    [SerializeField] private float _sprintSpeed = 2;
+    [SerializeField] private float _acceleration = 0.5f;
     private Vector3 _movementDirection;
     private float _currentSpeed = 1f;
     private Vector3 _velocityXZ;
     private float _velocityY;
     private bool _isGrounded;
+    private bool _isSprint;
     private void CheckIsGrounded()
     {
         LayerMask groundLayer = LayerMask.GetMask("Ground");
@@ -51,10 +55,34 @@ public class PlayerCharacterMovement : MonoBehaviour
             _velocityY = -2;
         }
     }
+    private void CalculateAcceleration()
+    {
+        if(_movementDirection.magnitude > 0.01)
+        {
+            if (_isSprint)
+            {
+                _currentSpeed = _currentSpeed + _acceleration * Time.deltaTime;
+            }
+            else
+            {
+                _currentSpeed = _currentSpeed - _acceleration * Time.deltaTime;
+            }
+            _currentSpeed = Mathf.Clamp(_currentSpeed, _walkSpeed, _sprintSpeed);
+        }
+        else
+        {
+            _currentSpeed = 0;
+        }
+    }
     private void Update()
     {
         CheckIsGrounded();
+        CalculateAcceleration();
         ResetVelocityY();
         Move();
+    }
+    public void SetSprint(bool isSprint)
+    {
+        _isSprint = isSprint;
     }
 }
