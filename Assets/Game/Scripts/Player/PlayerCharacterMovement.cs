@@ -12,6 +12,7 @@ public class PlayerCharacterMovement : MonoBehaviour
     private float _velocityY;
     private bool _isGrounded;
     private bool _isSprint;
+    public bool IsSprint => _isSprint;
     private void CheckIsGrounded()
     {
         LayerMask groundLayer = LayerMask.GetMask("Ground");
