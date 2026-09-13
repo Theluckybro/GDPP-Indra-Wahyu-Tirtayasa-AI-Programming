@@ -8,6 +8,14 @@ public class InputManager : MonoBehaviour, IPlayerActions
     private GameInputAction _inputAction;
     public UnityEvent<Vector2> OnMoveInput;
     public UnityEvent<bool> OnSprintInput;
+    public UnityEvent OnInteractInput;
+    public void OnInteract(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            OnInteractInput?.Invoke();
+        }
+    }
     public void OnSprint(InputAction.CallbackContext context)
     {
         if (context.performed)
@@ -25,13 +33,6 @@ public class InputManager : MonoBehaviour, IPlayerActions
         _inputAction.Enable();
         _inputAction.Player.Enable();
         _inputAction.Player.SetCallbacks(this);
-    }
-    public void OnInteract(InputAction.CallbackContext context)
-    {
-        if (context.performed)
-        {
-            Debug.Log("Interact");
-        }
     }
     public void OnMove(InputAction.CallbackContext context)
     {
