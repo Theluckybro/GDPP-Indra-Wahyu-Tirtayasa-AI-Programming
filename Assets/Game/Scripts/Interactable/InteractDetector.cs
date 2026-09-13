@@ -8,7 +8,12 @@ public class InteractDetector : MonoBehaviour
     [SerializeField] private LayerMask _interactableLayer;
     private IInteractable _detectedInteractable;
     private bool _isInteracting;
+    public bool Enabled { get; private set; } = true;
 
+    public void SetEnabled(bool isEnabled)
+    {
+        Enabled = isEnabled;
+    }
     private void Update()
     {
         UpdateDetection();
@@ -20,20 +25,24 @@ public class InteractDetector : MonoBehaviour
             _isInteracting = false;
             return;
         }
-        Transform cameraTransform = Camera.main.transform;
-        bool isDetectingInteractable = Physics.BoxCast(cameraTransform.position, _detectorBoxSize * 0.5f, cameraTransform.forward, out RaycastHit hit, Quaternion.identity, _detectorDistance, _interactableLayer);
-        if (isDetectingInteractable)
+        if (Enabled == true)
         {
-            IInteractable interactable = hit.collider.GetComponent<IInteractable>();
-            if (interactable != null)
+            Transform cameraTransform = Camera.main.transform;
+            bool isDetectingInteractable = Physics.BoxCast(cameraTransform.position, _detectorBoxSize * 0.5f, cameraTransform.forward, out RaycastHit hit, Quaternion.identity, _detectorDistance, _interactableLayer);
+            if (isDetectingInteractable)
             {
-                _detectedInteractable = interactable;
+                IInteractable interactable = hit.collider.GetComponent<IInteractable>();
+                if (interactable != null)
+                {
+                    _detectedInteractable = interactable;
+                }
             }
         }
+        
     }
     public void Interact()
     {
-        if (_detectedInteractable != null)
+        if (_detectedInteractable != null && Enabled == true)
         {
             _detectedInteractable.Interact(_owner);
             _detectedInteractable = null;
@@ -44,17 +53,20 @@ public class InteractDetector : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Transform cameraTransform = Camera.main.transform;
-        bool isDetectingInteractable = Physics.BoxCast(cameraTransform.position, _detectorBoxSize * 0.5f, cameraTransform.forward, out RaycastHit hit, Quaternion.identity, _detectorDistance, _interactableLayer);
-        if (isDetectingInteractable)
+        if (Enabled == true)
         {
-            Gizmos.color = Color.green;
-            Gizmos.DrawLine(cameraTransform.position, cameraTransform.position + cameraTransform.forward * hit.distance);
-            Gizmos.DrawWireCube(cameraTransform.position + cameraTransform.forward * hit.distance, _detectorBoxSize);
-        }
-        else
-        {
-            Gizmos.DrawLine(cameraTransform.position, cameraTransform.position + cameraTransform.forward * _detectorDistance);
-            Gizmos.DrawWireCube(cameraTransform.position + cameraTransform.forward * _detectorDistance, _detectorBoxSize);
+            bool isDetectingInteractable = Physics.BoxCast(cameraTransform.position, _detectorBoxSize * 0.5f, cameraTransform.forward, out RaycastHit hit, Quaternion.identity, _detectorDistance, _interactableLayer);
+            if (isDetectingInteractable)
+            {
+                Gizmos.color = Color.green;
+                Gizmos.DrawLine(cameraTransform.position, cameraTransform.position + cameraTransform.forward * hit.distance);
+                Gizmos.DrawWireCube(cameraTransform.position + cameraTransform.forward * hit.distance, _detectorBoxSize);
+            }
+            else
+            {
+                Gizmos.DrawLine(cameraTransform.position, cameraTransform.position + cameraTransform.forward * _detectorDistance);
+                Gizmos.DrawWireCube(cameraTransform.position + cameraTransform.forward * _detectorDistance, _detectorBoxSize);
+            }
         }
     }
 }
