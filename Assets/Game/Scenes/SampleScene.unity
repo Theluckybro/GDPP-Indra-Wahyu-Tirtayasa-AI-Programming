@@ -1028,6 +1028,7 @@ GameObject:
   - component: {fileID: 1765228008}
   - component: {fileID: 1765228009}
   - component: {fileID: 1765228010}
+  - component: {fileID: 1765228011}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1109,6 +1110,18 @@ MonoBehaviour:
   _maxStamina: 100
   _sprintStaminaCost: 20
   _staminaRegenValue: 20
+--- !u!114 &1765228011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1765228006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0ffbe4e78319bd498800c1a60d357d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1776560670
 PrefabInstance:
   m_ObjectHideFlags: 0
