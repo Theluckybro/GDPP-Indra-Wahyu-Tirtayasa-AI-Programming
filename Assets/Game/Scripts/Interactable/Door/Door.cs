@@ -18,13 +18,25 @@ public class Door : MonoBehaviour, IInteractable
     [ContextMenu("Interact Door")]
     public void Interact(PlayerCharacter character)
     {
-        if (_isOpen == true)
+        if (_islocked == true)
         {
-            Close();
+            bool hasKey = character.Inventory.CheckItem(_keyID);
+            if (hasKey)
+            {
+                _islocked = false;
+                Open();
+            }
         }
         else
         {
-            Open();
+            if (_isOpen == true)
+            {
+                Close();
+            }
+            else
+            {
+                Open();
+            }
         }
     }
     public virtual void Open()
