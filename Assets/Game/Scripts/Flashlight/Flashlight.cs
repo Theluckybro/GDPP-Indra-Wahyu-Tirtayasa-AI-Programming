@@ -4,11 +4,16 @@ public class Flashlight : MonoBehaviour
 {
     [SerializeField] private Light _light;
     [SerializeField] private PlayerCharacter _owner;
-    [SerializeField] private float _initialBatteryLife = 100;
+    [SerializeField] private float _initialBatteryLevel = 100;
     [SerializeField] private float _batteryDrainRate = 1;
     private float _batteryLevel;
     public bool HasFlashlight => _owner.Inventory.CheckItem("Flashlight_001");
     public bool HasBattery => _batteryLevel > 0;
+    private void Start()
+    {
+        _batteryLevel = _initialBatteryLevel;
+        HUDManager.Instance.BatteryLevelUI.UpdateBatteryUI(_batteryLevel, _initialBatteryLevel);
+    }
     public void UseFlashlight()
     {
         if (HasFlashlight == true && _light != null)
@@ -25,7 +30,7 @@ public class Flashlight : MonoBehaviour
     }
     private void Awake()
     {
-        _batteryLevel = _initialBatteryLife;
+        _batteryLevel = _initialBatteryLevel;
     }
     private void Update()
     {
@@ -45,6 +50,7 @@ public class Flashlight : MonoBehaviour
                 _batteryLevel = 0;
                 _light.enabled = false;
             }
+            HUDManager.Instance.BatteryLevelUI.UpdateBatteryUI(_batteryLevel, _initialBatteryLevel);
         }
     }
     private void UpdateFlashlightRotation()
@@ -53,6 +59,7 @@ public class Flashlight : MonoBehaviour
     }
     public void RefillBatteryLevel()
     {
-        _batteryLevel = _initialBatteryLife;
+        _batteryLevel = _initialBatteryLevel;
+        HUDManager.Instance.BatteryLevelUI.UpdateBatteryUI(_batteryLevel, _initialBatteryLevel);
     }
 }

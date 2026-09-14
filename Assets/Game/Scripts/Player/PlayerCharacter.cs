@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerCharacter : MonoBehaviour
 {
@@ -16,10 +17,15 @@ public class PlayerCharacter : MonoBehaviour
     public CameraManager Camera => _camera;
     public InputManager Input => _input;
     public Flashlight Flashlight => _flashlight;
+    public UnityEvent OnDeath;
     public bool IsHiding { get; private set; }
     public void SetHiding(bool isHiding)
     {
         IsHiding = isHiding;
+    }
+    public void Death()
+    {
+        OnDeath?.Invoke();
     }
     private void Awake()
     {
