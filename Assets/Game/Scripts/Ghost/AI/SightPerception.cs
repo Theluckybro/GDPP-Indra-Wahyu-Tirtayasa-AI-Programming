@@ -7,6 +7,8 @@ public class SightPerception : MonoBehaviour
     [SerializeField] private float _viewDistance = 10f; 
     [SerializeField] private float _viewAngle = 70f;
     [SerializeField] private LayerMask _targetLayer;
+    // The target pivot is at the player's feet; aim at the body instead
+    [SerializeField] private float _targetHeightOffset = 1f;
     public bool CanSeePlayer { get; private set; }
     public Vector3 LastSeenPosition { get; private set; }
     private void Update()
@@ -19,13 +21,14 @@ public class SightPerception : MonoBehaviour
         {
             return false;
         }
-        float distance = Vector3.Distance(_eyePosition.position, _target.position);
+        Vector3 targetPosition = _target.position + Vector3.up * _targetHeightOffset;
+        float distance = Vector3.Distance(_eyePosition.position, targetPosition);
         if (distance > _viewDistance)
         {
             return false;
         }
 
-        Vector3 dirToTarget = _target.position - _eyePosition.position;
+        Vector3 dirToTarget = targetPosition - _eyePosition.position;
         float angle = Vector3.Angle(_eyePosition.forward, dirToTarget);
         if (angle > _viewAngle * 0.5f)
         {

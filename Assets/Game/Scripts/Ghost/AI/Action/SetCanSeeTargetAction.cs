@@ -18,7 +18,7 @@ public partial class SetCanSeeTargetAction : Action
 
     protected override Status OnUpdate()
     {
-        if (AI.Value == null && AI.Value.SightPerception == null)
+        if (AI.Value == null || AI.Value.SightPerception == null)
         {
             return Status.Failure;
         }

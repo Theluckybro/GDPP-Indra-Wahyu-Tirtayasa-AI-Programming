@@ -20,8 +20,7 @@ public class PlayerCharacterMovement : MonoBehaviour
     }
     private void CheckIsGrounded()
     {
-        LayerMask groundLayer = LayerMask.GetMask("Ground");
-        _isGrounded = Physics.CheckSphere(transform.position, 0.5f, groundLayer);
+        _isGrounded = _characterController.isGrounded;
     }
     public void SetMoveDirection(Vector2 moveDirection)
     {
@@ -53,7 +52,8 @@ public class PlayerCharacterMovement : MonoBehaviour
         {
             CalculateVelocityXZ();
             CalculateVelocityY();
-            Vector3 velocity = new Vector3(_velocityXZ.x, _velocityY, _velocityXZ.z);
+            // _velocityXZ is already a per-frame displacement, _velocityY is in m/s
+            Vector3 velocity = new Vector3(_velocityXZ.x, _velocityY * Time.deltaTime, _velocityXZ.z);
             _characterController.Move(velocity);
         }
     }

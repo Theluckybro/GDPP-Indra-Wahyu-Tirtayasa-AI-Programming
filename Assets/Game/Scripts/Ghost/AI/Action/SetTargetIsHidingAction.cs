@@ -18,7 +18,7 @@ public partial class SetTargetIsHidingAction : Action
 
     protected override Status OnUpdate()
     {
-        if (AI.Value == null && AI.Value.Target == null)
+        if (AI.Value == null || AI.Value.Target == null)
         {
             return Status.Failure;
         }

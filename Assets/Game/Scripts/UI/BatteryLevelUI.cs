@@ -22,7 +22,7 @@ public class BatteryLevelUI : MonoBehaviour
         {
             color = _lowColor;
         }
-        else if (fillAmount > 0.25f && fillAmount < 0.5f)
+        else if (fillAmount < 0.5f)
         {
             color = _mediumColor;
         }

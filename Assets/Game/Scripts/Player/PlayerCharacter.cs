@@ -19,12 +19,19 @@ public class PlayerCharacter : MonoBehaviour
     public Flashlight Flashlight => _flashlight;
     public UnityEvent OnDeath;
     public bool IsHiding { get; private set; }
+    public bool IsDead { get; private set; }
     public void SetHiding(bool isHiding)
     {
         IsHiding = isHiding;
     }
     public void Death()
     {
+        // Death can be requested every frame until the lose scene finishes loading
+        if (IsDead == true)
+        {
+            return;
+        }
+        IsDead = true;
         OnDeath?.Invoke();
     }
     private void Awake()
