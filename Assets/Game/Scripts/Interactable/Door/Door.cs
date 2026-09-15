@@ -15,6 +15,7 @@ public class Door : MonoBehaviour, IInteractable
     public string Name => _name;
     public UnityEvent OnDoorOpen;
     public UnityEvent OnDoorClose;
+    public UnityEvent OnOpenLockedDoor;
     [ContextMenu("Interact Door")]
     public void Interact(PlayerCharacter character)
     {
@@ -25,6 +26,10 @@ public class Door : MonoBehaviour, IInteractable
             {
                 _islocked = false;
                 Open();
+            }
+            else
+            {
+                OnOpenLockedDoor?.Invoke();
             }
         }
         else
