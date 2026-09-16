@@ -186,3 +186,8 @@ LightingData.asset     binary
 [Bb]uild/**/globalgamemanagers* lfs
 [Bb]uild/**/unity_builtin_extra lfs
 "[Bb]uild/**/unity default resources" lfs
+
+# Player data split into parts: GitHub LFS rejects any single file over 2 GiB.
+# Reassemble with Build/Join-Build.bat before running the game.
+[Bb]uild/**/*.resS.[0-9][0-9][0-9]  lfs
+*.bat                   text eol=crlf

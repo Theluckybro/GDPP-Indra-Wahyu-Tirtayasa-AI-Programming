@@ -114,3 +114,6 @@ InitTestScene*.unity*
 
 # Auto-generated cache in Assets folder
 /[Aa]ssets/[Ss]ceneDependencyCache*
+
+# Reassembled locally from its .001/.002/.003 parts by Build/Join-Build.bat
+/[Bb]uild/House of Silence_Data/sharedassets1.assets.resS
