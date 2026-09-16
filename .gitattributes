@@ -169,3 +169,20 @@ Packages/packages-lock.json linguist-generated
 
 # Exceptions for .asset files such as lightning pre-baking
 LightingData.asset     binary
+
+# Unity player build output (Build branch)
+*.assets                lfs
+*.resS                  lfs
+*.resource              lfs
+*.bundle                lfs
+*.unity3d               lfs
+*.data                  lfs
+*.obb                   lfs
+*.aab                   lfs
+*.bin                   lfs
+*.dat                   lfs
+*.sym                   lfs
+[Bb]uild/**/level*      lfs
+[Bb]uild/**/globalgamemanagers* lfs
+[Bb]uild/**/unity_builtin_extra lfs
+"[Bb]uild/**/unity default resources" lfs

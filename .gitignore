@@ -17,8 +17,9 @@
 /[Ll]ibrary/
 /[Tt]emp/
 /[Oo]bj/
-/[Bb]uild/
-/[Bb]uilds/
+# On the Build branch the player build is tracked instead of ignored
+# /[Bb]uild/
+# /[Bb]uilds/
 /[Ll]ogs/
 /[Uu]ser[Ss]ettings/
 *.log
@@ -79,11 +80,12 @@ sysinfo.txt
 mono_crash.*
 
 # Builds
-*.apk
-*.aab
+# On the Build branch the player build is tracked instead of ignored
+# *.apk
+# *.aab
 *.unitypackage
 *.unitypackage.meta
-*.app
+# *.app
 
 # Crashlytics generated file
 crashlytics-build.properties
