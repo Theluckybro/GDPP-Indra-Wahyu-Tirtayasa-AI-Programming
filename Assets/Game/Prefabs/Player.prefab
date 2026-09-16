@@ -288,9 +288,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characterController: {fileID: 4929421989592268885}
   _gravityScale: 1
-  _walkSpeed: 1
-  _sprintSpeed: 2
-  _acceleration: 0.5
+  _walkSpeed: 2.2
+  _sprintSpeed: 5
+  _acceleration: 6
 --- !u!114 &394583239024400527
 MonoBehaviour:
   m_ObjectHideFlags: 0

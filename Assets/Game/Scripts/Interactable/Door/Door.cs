@@ -5,6 +5,8 @@ public class Door : MonoBehaviour, IInteractable
 {
     [SerializeField] private string _name;
     [SerializeField] protected Transform _doorTransform;
+    // Optional, when left empty it falls back to the collider on the door transform
+    [SerializeField] protected Collider _doorCollider;
     [SerializeField] protected float _duration = 1f;
     [SerializeField] protected bool _islocked;
     [SerializeField] protected string _keyID;
@@ -16,6 +18,14 @@ public class Door : MonoBehaviour, IInteractable
     public UnityEvent OnDoorOpen;
     public UnityEvent OnDoorClose;
     public UnityEvent OnOpenLockedDoor;
+    protected virtual void Awake()
+    {
+        if (_doorCollider == null && _doorTransform != null)
+        {
+            _doorCollider = _doorTransform.GetComponent<Collider>();
+        }
+        UpdateCollision();
+    }
     [ContextMenu("Interact Door")]
     public void Interact(PlayerCharacter character)
     {
@@ -47,11 +57,21 @@ public class Door : MonoBehaviour, IInteractable
     public virtual void Open()
     {
         _isOpen = true;
+        UpdateCollision();
         OnDoorOpen?.Invoke();
     }
     public virtual void Close()
     {
         _isOpen = false;
+        UpdateCollision();
         OnDoorClose?.Invoke();
+    }
+    // An open door turns into a trigger instead of being disabled, so the player walks through it while the interaction box cast still finds it and can close it again
+    protected void UpdateCollision()
+    {
+        if (_doorCollider != null)
+        {
+            _doorCollider.isTrigger = _isOpen;
+        }
     }
 }
